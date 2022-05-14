@@ -26,7 +26,7 @@ public class ConsumerWorker {
                 try {
                     final int offset = this.offset.get();
                     final int queueSize = topic.getQueueSize().get();
-                    if(offset == queueSize) {
+                    while(offset == queueSize) {
                         this.wait();
                     }
                     final Message message = topic.getMessage().get(offset);
